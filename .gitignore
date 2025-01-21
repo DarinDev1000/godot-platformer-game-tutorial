@@ -3,3 +3,4 @@
 /android/
 *.tmp
 savegame.bin
+export_presets.cfg
