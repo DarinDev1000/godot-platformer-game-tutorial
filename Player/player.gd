@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var health := 10
+const SPEED := 300.0
+const JUMP_VELOCITY := -400.0
 
 @onready var animPlayer : AnimationPlayer = get_node("AnimationPlayer")
 @onready var animSprite : AnimatedSprite2D = get_node("AnimatedSprite2D")
@@ -41,3 +41,7 @@ func _physics_process(delta: float) -> void:
 		animPlayer.play("Fall")
 
 	move_and_slide()
+	
+	if health <= 0:
+		queue_free()
+		get_tree().change_scene_to_file("res://main.tscn")

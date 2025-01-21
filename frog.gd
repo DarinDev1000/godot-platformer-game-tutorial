@@ -43,15 +43,26 @@ func _on_player_detection_body_exited(body: Node2D) -> void:
 
 func _on_player_death_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		## Disable colission with Player
-		player.set_collision_mask_value(3, false)
-		get_node("AnimatedSprite2D").play("Death")
-		print("Death")
-		death = true
+		doDeath()
 
-
+# Waits for death animation to finish before destroying
 func _on_animated_sprite_2d_animation_finished() -> void:
-	print("animation_finished")
+	#print("animation_finished")
 	if death:
-		print("Death after await")
+		#print("Death after await")
 		self.queue_free()
+
+# Damage player on sides
+func _on_player_collision_body_entered(body: Node2D) -> void:
+	if body.name == "Player" and !death:
+		body.health -= 3
+		doDeath()
+
+
+func doDeath() -> void:
+	#print("Death")
+	## Disable collision with Player
+	self.set_collision_layer_value(3, false)
+	# Start Death Animation
+	get_node("AnimatedSprite2D").play("Death")
+	death = true

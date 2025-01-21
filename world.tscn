@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc1phn4iprh0g"]
+[gd_scene load_steps=9 format=3 uid="uid://bc1phn4iprh0g"]
 
 [ext_resource type="Script" path="res://bg.gd" id="1_8t6sm"]
 [ext_resource type="PackedScene" uid="uid://f5rk8vb4yfdn" path="res://Player/player.tscn" id="1_bbf2x"]
@@ -220,6 +220,20 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 6
 sources/0 = SubResource("TileSetAtlasSource_qifjb")
 
+[sub_resource type="GDScript" id="GDScript_0ppdx"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = \"HP: \" + str(%Player.health)
+"
+
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -248,3 +262,39 @@ position = Vector2(554, 191)
 
 [node name="Frog" parent="Mobs" instance=ExtResource("5_gdo3u")]
 position = Vector2(316, 324)
+
+[node name="Frog2" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(132, 239)
+
+[node name="Frog3" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(450, 294)
+
+[node name="Frog4" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(727, 311)
+
+[node name="Frog5" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(830, 241)
+
+[node name="Frog6" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(984, 293)
+
+[node name="Frog7" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(1106, 223)
+
+[node name="Frog8" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(1167, 298)
+
+[node name="Frog9" parent="Mobs" instance=ExtResource("5_gdo3u")]
+position = Vector2(1278, 238)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hp" type="Label" parent="UI"]
+offset_left = 26.0
+offset_top = 12.0
+offset_right = 66.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "HP"
+script = SubResource("GDScript_0ppdx")
