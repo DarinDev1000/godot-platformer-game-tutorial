@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health := 10
+
 const SPEED := 300.0
 const JUMP_VELOCITY := -400.0
 
@@ -12,6 +12,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	print("Position G: ", global_position)
+	print("Position L: ", position)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -42,6 +44,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	if health <= 0:
+	if Game.playerHP <= 0:
 		queue_free()
 		get_tree().change_scene_to_file("res://main.tscn")

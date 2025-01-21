@@ -55,12 +55,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 # Damage player on sides
 func _on_player_collision_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and !death:
-		body.health -= 3
+		Game.playerHP -= 3
 		doDeath()
 
 
 func doDeath() -> void:
 	#print("Death")
+	Game.Gold += 5
+	Utils.saveGame()
+	
 	## Disable collision with Player
 	self.set_collision_layer_value(3, false)
 	# Start Death Animation

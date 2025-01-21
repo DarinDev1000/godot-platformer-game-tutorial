@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc1phn4iprh0g"]
+[gd_scene load_steps=11 format=3 uid="uid://bc1phn4iprh0g"]
 
 [ext_resource type="Script" path="res://bg.gd" id="1_8t6sm"]
 [ext_resource type="PackedScene" uid="uid://f5rk8vb4yfdn" path="res://Player/player.tscn" id="1_bbf2x"]
 [ext_resource type="Texture2D" uid="uid://csx61xw18jrhg" path="res://Sunny Land Collection Files/Assets/Environments/SunnyLand/Layers/tileset.png" id="1_lpfwg"]
 [ext_resource type="Texture2D" uid="uid://gswkj8wjpuyb" path="res://Sunny Land Collection Files/Assets/Environments/SunnyLand/Layers/back.png" id="2_f0aij"]
 [ext_resource type="PackedScene" uid="uid://c1fhjpd6ob28g" path="res://frog.tscn" id="5_gdo3u"]
+[ext_resource type="PackedScene" uid="uid://cbyhfsabpl7kv" path="res://Collectables/cherry.tscn" id="6_fgmoe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qifjb"]
 texture = ExtResource("1_lpfwg")
@@ -231,7 +232,21 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = \"HP: \" + str(%Player.health)
+	text = \"HP: \" + str(Game.playerHP)
+"
+
+[sub_resource type="GDScript" id="GDScript_vc1cb"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = \"Gold: \" + str(Game.Gold)
 "
 
 [node name="World" type="Node2D"]
@@ -298,3 +313,36 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "HP"
 script = SubResource("GDScript_0ppdx")
+
+[node name="Gold" type="Label" parent="UI"]
+offset_left = 25.0
+offset_top = 49.0
+offset_right = 79.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Gold"
+script = SubResource("GDScript_vc1cb")
+
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="Cherry" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(58, 330)
+
+[node name="Cherry2" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(260, 336)
+
+[node name="Cherry3" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(676, 266)
+
+[node name="Cherry4" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(998, 336)
+
+[node name="Cherry5" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(1298, 293)
+
+[node name="Cherry6" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(1654, 227)
+
+[node name="Cherry7" parent="Collectables" instance=ExtResource("6_fgmoe")]
+position = Vector2(1877, 336)
