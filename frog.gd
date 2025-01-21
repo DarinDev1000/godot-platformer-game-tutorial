@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 const SPEED := 50
 var player : CharacterBody2D
 var chase := false
@@ -8,6 +9,7 @@ var death := false
 
 func _ready() -> void:
 	get_node("AnimatedSprite2D").play("Idle")
+	player = %Player
 
 
 func _physics_process(delta: float) -> void:
@@ -17,7 +19,6 @@ func _physics_process(delta: float) -> void:
 	if !death:
 		if chase:
 			get_node("AnimatedSprite2D").play("Jump")
-			player = $"../../Player2/Player"
 			var direction = (player.position - self.position).normalized()
 			if direction.x > 0:
 				get_node("AnimatedSprite2D").flip_h = true
@@ -42,6 +43,8 @@ func _on_player_detection_body_exited(body: Node2D) -> void:
 
 func _on_player_death_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
+		## Disable colission with Player
+		player.set_collision_mask_value(3, false)
 		get_node("AnimatedSprite2D").play("Death")
 		print("Death")
 		death = true

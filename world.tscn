@@ -217,6 +217,7 @@ texture = ExtResource("1_lpfwg")
 
 [sub_resource type="TileSet" id="TileSet_0uq70"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 6
 sources/0 = SubResource("TileSetAtlasSource_qifjb")
 
 [node name="World" type="Node2D"]
@@ -237,9 +238,10 @@ position = Vector2(576, 324)
 scale = Vector2(3, 2.7)
 texture = ExtResource("2_f0aij")
 
-[node name="Player2" type="Node2D" parent="."]
+[node name="PlayerContainer" type="Node2D" parent="."]
 
-[node name="Player" parent="Player2" instance=ExtResource("1_bbf2x")]
+[node name="Player" parent="PlayerContainer" instance=ExtResource("1_bbf2x")]
+unique_name_in_owner = true
 position = Vector2(554, 191)
 
 [node name="Mobs" type="Node2D" parent="."]
