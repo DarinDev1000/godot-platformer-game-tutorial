@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://csx61xw18jrhg" path="res://Sunny Land Collection Files/Assets/Environments/SunnyLand/Layers/tileset.png" id="1_lpfwg"]
 [ext_resource type="Texture2D" uid="uid://gswkj8wjpuyb" path="res://Sunny Land Collection Files/Assets/Environments/SunnyLand/Layers/back.png" id="2_f0aij"]
 [ext_resource type="PackedScene" uid="uid://c1fhjpd6ob28g" path="res://frog.tscn" id="5_gdo3u"]
-[ext_resource type="PackedScene" uid="uid://cbyhfsabpl7kv" path="res://Collectables/cherry.tscn" id="6_fgmoe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qifjb"]
 texture = ExtResource("1_lpfwg")
@@ -249,6 +248,18 @@ func _process(delta: float) -> void:
 	text = \"Gold: \" + str(Game.Gold)
 "
 
+[sub_resource type="GDScript" id="GDScript_mj6ps"]
+script/source = "extends Node2D
+
+
+var Cherry =  preload(\"res://Collectables/cherry.tscn\")
+
+func _on_timer_timeout() -> void:
+	var cherryTemp = Cherry.instantiate()
+	cherryTemp.position = Vector2(randi_range(50, 2100), randi_range(335, 250))
+	add_child(cherryTemp)
+"
+
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -271,18 +282,18 @@ texture = ExtResource("2_f0aij")
 
 [node name="Player" parent="PlayerContainer" instance=ExtResource("1_bbf2x")]
 unique_name_in_owner = true
-position = Vector2(554, 191)
+position = Vector2(265, 154)
 
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Frog" parent="Mobs" instance=ExtResource("5_gdo3u")]
-position = Vector2(316, 324)
+position = Vector2(589, 344)
 
 [node name="Frog2" parent="Mobs" instance=ExtResource("5_gdo3u")]
-position = Vector2(132, 239)
+position = Vector2(40, 316)
 
 [node name="Frog3" parent="Mobs" instance=ExtResource("5_gdo3u")]
-position = Vector2(450, 294)
+position = Vector2(497, 296)
 
 [node name="Frog4" parent="Mobs" instance=ExtResource("5_gdo3u")]
 position = Vector2(727, 311)
@@ -325,24 +336,9 @@ text = "Gold"
 script = SubResource("GDScript_vc1cb")
 
 [node name="Collectables" type="Node2D" parent="."]
+script = SubResource("GDScript_mj6ps")
 
-[node name="Cherry" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(58, 330)
+[node name="Timer" type="Timer" parent="Collectables"]
+autostart = true
 
-[node name="Cherry2" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(260, 336)
-
-[node name="Cherry3" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(676, 266)
-
-[node name="Cherry4" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(998, 336)
-
-[node name="Cherry5" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(1298, 293)
-
-[node name="Cherry6" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(1654, 227)
-
-[node name="Cherry7" parent="Collectables" instance=ExtResource("6_fgmoe")]
-position = Vector2(1877, 336)
+[connection signal="timeout" from="Collectables/Timer" to="Collectables" method="_on_timer_timeout"]
